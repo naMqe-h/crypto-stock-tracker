@@ -2,14 +2,15 @@
 
 @theme {
     --color-background: #0f111a;
-    --color-surface: #1e2130;
-    --color-surface-hover: #2a2e42;
+    --color-surface: rgba(255, 255, 255, 0.03);
+    --color-surface-hover: rgba(255, 255, 255, 0.08);
+    --color-border: rgba(255, 255, 255, 0.08);
     --color-text-primary: #f8f9fa;
     --color-text-secondary: #94a3b8;
 
-    --color-primary: #b392f0;
-    --color-primary-hover: #c4a9f4;
-    --color-success: #a7f3d0;
+    --color-primary: #4ade80;
+    --color-primary-hover: #22c55e;
+    --color-success: #86efac;
     --color-danger: #fecdd3;
     --color-warning: #fef08a;
 
