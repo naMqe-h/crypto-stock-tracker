@@ -35,13 +35,13 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} className="dark">
-            <body className="min-h-screen bg-[var(--color-background)] text-[var(--color-text-primary)] antialiased flex flex-col relative overflow-x-hidden">
+            <body className="h-screen bg-[var(--color-background)] text-[var(--color-text-primary)] antialiased flex flex-col relative overflow-hidden">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[var(--color-primary)]/20 blur-[120px] pointer-events-none" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[var(--color-primary)]/10 blur-[120px] pointer-events-none" />
 
                 <NextIntlClientProvider messages={messages}>
                     <WatchlistProvider>
-                        <div className="relative z-10 flex-1 flex flex-col min-h-screen">
+                        <div className="relative z-10 flex-1 flex flex-col h-screen overflow-hidden">
                             <Topbar />
                             <main className="flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full">
                                 {children}

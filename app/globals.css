@@ -21,4 +21,24 @@
     body {
         @apply bg-[var(--color-background)] text-[var(--color-text-primary)] font-sans antialiased;
     }
+
+    /* Custom Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary-hover);
+    }
 }

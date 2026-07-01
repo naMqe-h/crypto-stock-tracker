@@ -15,5 +15,21 @@
     "Watchlist": {
         "title": "Twoja Lista",
         "empty": "Twoja lista jest pusta."
+    },
+    "Table": {
+        "index": "Lp.",
+        "asset": "Aktywo",
+        "price": "Cena",
+        "change24h": "Zmiana 24h",
+        "marketCap": "Kapitalizacja",
+        "volume24h": "Wolumen (24h)",
+        "action": "Akcja",
+        "noData": "Brak danych.",
+        "add": "Dodaj",
+        "saved": "Zapisano"
+    },
+    "Dashboard": {
+        "topCrypto": "Top 20 Kryptowalut",
+        "topStocks": "Top 20 Akcji (USA)"
     }
 }

@@ -15,5 +15,21 @@
     "Watchlist": {
         "title": "Your Watchlist",
         "empty": "Your watchlist is empty. Add some assets!"
+    },
+    "Table": {
+        "index": "#",
+        "asset": "Asset",
+        "price": "Price",
+        "change24h": "24h Change",
+        "marketCap": "Market Cap",
+        "volume24h": "Volume (24h)",
+        "action": "Action",
+        "noData": "No data available.",
+        "add": "Add",
+        "saved": "Saved"
+    },
+    "Dashboard": {
+        "topCrypto": "Top 20 Cryptocurrencies",
+        "topStocks": "Top 20 US Stocks"
     }
 }
