@@ -6,6 +6,7 @@ import { routing } from '../../i18n/routing'
 import '../globals.css'
 
 import { Topbar } from '../../components/Topbar'
+import { WatchlistProvider } from '../../store/WatchlistContext'
 
 export const metadata: Metadata = {
     title: 'Crypto & Stocks Tracker',
@@ -39,12 +40,14 @@ export default async function LocaleLayout({
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[var(--color-primary)]/10 blur-[120px] pointer-events-none" />
 
                 <NextIntlClientProvider messages={messages}>
-                    <div className="relative z-10 flex-1 flex flex-col min-h-screen">
-                        <Topbar />
-                        <main className="flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full">
-                            {children}
-                        </main>
-                    </div>
+                    <WatchlistProvider>
+                        <div className="relative z-10 flex-1 flex flex-col min-h-screen">
+                            <Topbar />
+                            <main className="flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full">
+                                {children}
+                            </main>
+                        </div>
+                    </WatchlistProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
