@@ -51,19 +51,21 @@ export async function getTopCrypto(page: number = 1): Promise<AssetPrice[]> {
 export async function getCryptoPrices(ids: string[]): Promise<AssetPrice[]> {
     if (!ids || ids.length === 0) return []
     try {
-        const response = await fetch(`${BASE_URL}/simple/price?ids=${ids.join(',')}&vs_currencies=usd&include_24hr_change=true`)
+        const response = await fetch(`${BASE_URL}/coins/markets?vs_currency=usd&ids=${ids.join(',')}&sparkline=false`, { cache: 'no-store' })
         if (!response.ok) throw new Error('Network response was not ok')
         const data = await response.json()
 
-        return ids.map(id => {
-            const coinData = data[id]
-            return {
-                id,
-                symbol: id.toUpperCase(),
-                price: coinData?.usd || 0,
-                change24h: coinData?.usd_24h_change || 0
-            }
-        })
+        return data.map((coin: any) => ({
+            id: coin.id,
+            symbol: coin.symbol.toUpperCase(),
+            name: coin.name,
+            price: coin.current_price,
+            change24h: coin.price_change_percentage_24h,
+            image: coin.image,
+            marketCap: coin.market_cap,
+            volume24h: coin.total_volume,
+            type: 'crypto'
+        }))
     } catch (error) {
         console.error('Error fetching crypto prices:', error)
         return []

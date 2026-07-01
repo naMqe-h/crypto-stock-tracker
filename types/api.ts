@@ -1,4 +1,4 @@
-export type AssetType = 'crypto' | 'stock'
+export type AssetType = 'crypto' | 'stock' | "mixed"
 
 export interface SearchResult {
     id: string
@@ -16,4 +16,5 @@ export interface AssetPrice {
     image?: string
     marketCap?: number
     volume24h?: number
+    type?: AssetType
 }

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-export type AssetType = 'crypto' | 'stock'
+export type AssetType = 'crypto' | 'stock' | "mixed"
 
 export interface WatchlistItem {
     id: string

@@ -45,7 +45,8 @@ export async function getStockPrice(symbol: string, name?: string, image?: strin
             change24h: quote.regularMarketChangePercent || 0,
             marketCap: quote.marketCap,
             volume24h: quote.regularMarketVolume,
-            image: image || `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`
+            image: image || `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`,
+            type: 'stock'
         }
     } catch (error) {
         console.error(`Error fetching stock price for ${symbol}:`, error)

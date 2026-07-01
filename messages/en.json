@@ -9,6 +9,7 @@
     },
     "Navigation": {
         "title": "Tracker",
+        "home": "Home",
         "crypto": "Crypto",
         "stocks": "Stocks"
     },
@@ -23,8 +24,11 @@
         "change24h": "24h Change",
         "marketCap": "Market Cap",
         "volume24h": "Volume (24h)",
+        "type": "Type",
+        "crypto": "Crypto",
+        "stock": "Stock",
         "action": "Action",
-        "noData": "No data available.",
+        "noData": "No data found.",
         "add": "Add",
         "saved": "Saved"
     },

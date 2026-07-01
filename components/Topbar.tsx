@@ -11,6 +11,12 @@ export function Topbar() {
 
             <nav className="flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                 <Link
+                    href="/"
+                    className="text-lg text-white hover:text-[var(--color-primary)] transition-colors font-medium hover:drop-shadow-[0_0_5px_rgba(74,222,128,0.5)] tracking-wide"
+                >
+                    {t('home')}
+                </Link>
+                <Link
                     href="/crypto"
                     className="text-lg text-white hover:text-[var(--color-primary)] transition-colors font-medium hover:drop-shadow-[0_0_5px_rgba(74,222,128,0.5)] tracking-wide"
                 >

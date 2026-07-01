@@ -9,6 +9,7 @@
     },
     "Navigation": {
         "title": "Tracker",
+        "home": "Strona główna",
         "crypto": "Krypto",
         "stocks": "Akcje"
     },
@@ -23,6 +24,9 @@
         "change24h": "Zmiana 24h",
         "marketCap": "Kapitalizacja",
         "volume24h": "Wolumen (24h)",
+        "type": "Typ",
+        "crypto": "Krypto",
+        "stock": "Akcje",
         "action": "Akcja",
         "noData": "Brak danych.",
         "add": "Dodaj",
