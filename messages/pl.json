@@ -1,0 +1,19 @@
+{
+    "Common": {
+        "searchPlaceholder": "Szukaj...",
+        "add": "Dodaj",
+        "remove": "Usuń",
+        "cancel": "Anuluj",
+        "price": "Cena",
+        "change24h": "Zmiana 24h"
+    },
+    "Navigation": {
+        "title": "Tracker",
+        "crypto": "Krypto",
+        "stocks": "Akcje"
+    },
+    "Watchlist": {
+        "title": "Twoja Lista",
+        "empty": "Twoja lista jest pusta."
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "Common": {
+        "searchPlaceholder": "Search for asset...",
+        "add": "Add",
+        "remove": "Remove",
+        "cancel": "Cancel",
+        "price": "Price",
+        "change24h": "24h Change"
+    },
+    "Navigation": {
+        "title": "Tracker",
+        "crypto": "Crypto",
+        "stocks": "Stocks"
+    },
+    "Watchlist": {
+        "title": "Your Watchlist",
+        "empty": "Your watchlist is empty. Add some assets!"
+    }
+}
