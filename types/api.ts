@@ -5,6 +5,8 @@ export interface SearchResult {
     symbol: string
     name: string
     type: AssetType
+    image?: string
+    marketCap?: number
 }
 
 export interface AssetPrice {

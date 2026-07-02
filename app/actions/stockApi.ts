@@ -15,16 +15,23 @@ export async function searchStocks(query: string): Promise<SearchResult[]> {
             enableFuzzyQuery: true
         })
 
-        return (results.quotes || [])
+        const validStocks = (results.quotes || [])
             .filter(quote => quote.isYahooFinance)
             .slice(0, 5)
-            .map((stock: any) => ({
-                id: stock.symbol,
-                symbol: stock.symbol,
-                name: stock.shortname || stock.longname || stock.symbol,
-                type: 'stock',
-                image: `https://companiesmarketcap.com/img/company-logos/64/${stock.symbol.replace('.', '-')}.webp`
-            }))
+
+        if (validStocks.length === 0) return []
+
+        const symbols = validStocks.map(stock => stock.symbol)
+        const detailedStocks = await getStockPrices(symbols)
+
+        return detailedStocks.map(stock => ({
+            id: stock.symbol,
+            symbol: stock.symbol,
+            name: stock.name || stock.symbol,
+            type: 'stock',
+            image: stock.image,
+            marketCap: stock.marketCap
+        }))
     } catch (error) {
         console.error('Error fetching stock search results:', error)
         return []

@@ -11,11 +11,19 @@ export async function searchCrypto(query: string): Promise<SearchResult[]> {
         if (!response.ok) throw new Error('Network response was not ok')
         const data = await response.json()
 
-        return (data.coins || []).slice(0, 5).map((coin: any) => ({
+        const coins = (data.coins || []).slice(0, 5)
+        if (coins.length === 0) return []
+
+        const ids = coins.map((c: any) => c.id)
+        const detailedCoins = await getCryptoPrices(ids)
+
+        return detailedCoins.map(coin => ({
             id: coin.id,
-            symbol: coin.symbol.toUpperCase(),
-            name: coin.name,
-            type: 'crypto'
+            symbol: coin.symbol,
+            name: coin.name || coin.symbol,
+            type: 'crypto',
+            image: coin.image,
+            marketCap: coin.marketCap
         }))
     } catch (error) {
         console.error('Error fetching crypto search results:', error)
