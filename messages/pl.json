@@ -68,5 +68,11 @@
         "title": "Nie znaleziono strony",
         "description": "Strona, której szukasz nie istnieje lub została przeniesiona.",
         "goHome": "Wróć do Panelu"
+    },
+    "NewsFeed": {
+        "title": "Najnowsze Wiadomości",
+        "noNews": "Brak najnowszych wiadomości dla tego aktywa.",
+        "readMore": "Czytaj dalej",
+        "published": "Opublikowano"
     }
 }

@@ -1,6 +1,7 @@
 import { getStockDetails } from '../../../../app/actions/stockApi'
 import { notFound } from 'next/navigation'
 import { StockChartSection } from '../../../../components/StockChartSection'
+import { NewsFeed } from '../../../../components/NewsFeed'
 import { getTranslations, getFormatter } from 'next-intl/server'
 
 interface PageProps {
@@ -66,6 +67,8 @@ export default async function StockDetailsPage({ params }: PageProps) {
                     </div>
                 </div>
             )}
+
+            <NewsFeed query={details.name} />
         </div>
     )
 }

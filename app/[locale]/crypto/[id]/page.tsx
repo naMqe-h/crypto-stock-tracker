@@ -1,8 +1,8 @@
 import { getCryptoDetails } from '../../../../app/actions/cryptoApi'
 import { notFound } from 'next/navigation'
 import { CryptoChartSection } from '../../../../components/CryptoChartSection'
+import { NewsFeed } from '../../../../components/NewsFeed'
 import { getTranslations, getFormatter } from 'next-intl/server'
-
 
 interface PageProps {
     params: Promise<{ id: string, locale: string }>
@@ -68,6 +68,8 @@ export default async function CryptoDetailsPage({ params }: PageProps) {
                     />
                 </div>
             )}
+
+            <NewsFeed query={details.name} />
         </div>
     )
 }

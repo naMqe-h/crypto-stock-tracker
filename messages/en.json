@@ -68,5 +68,11 @@
         "title": "Page Not Found",
         "description": "The page you are looking for does not exist or has been moved.",
         "goHome": "Return to Dashboard"
+    },
+    "NewsFeed": {
+        "title": "Latest News",
+        "noNews": "No recent news found for this asset.",
+        "readMore": "Read more",
+        "published": "Published"
     }
 }

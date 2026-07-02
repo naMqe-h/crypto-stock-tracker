@@ -31,6 +31,15 @@ export interface ChartData {
     volume?: number
 }
 
+export interface NewsArticle {
+    id: string
+    title: string
+    publisher: string
+    link: string
+    publishTime: string
+    thumbnail?: string
+}
+
 export interface AssetDetails extends AssetPrice {
     description?: string
     homepage?: string
