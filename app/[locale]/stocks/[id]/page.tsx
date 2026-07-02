@@ -1,16 +1,15 @@
-import { getCryptoDetails } from '../../../../app/actions/cryptoApi'
+import { getStockDetails } from '../../../../app/actions/stockApi'
 import { notFound } from 'next/navigation'
-import { CryptoChartSection } from '../../../../components/CryptoChartSection'
+import { StockChartSection } from '../../../../components/StockChartSection'
 import { getTranslations, getFormatter } from 'next-intl/server'
-
 
 interface PageProps {
     params: Promise<{ id: string, locale: string }>
 }
 
-export default async function CryptoDetailsPage({ params }: PageProps) {
+export default async function StockDetailsPage({ params }: PageProps) {
     const { id, locale } = await params
-    const details = await getCryptoDetails(id)
+    const details = await getStockDetails(id.toUpperCase())
     const t = await getTranslations('AssetDetails')
     const format = await getFormatter()
 
@@ -34,7 +33,7 @@ export default async function CryptoDetailsPage({ params }: PageProps) {
                         </div>
                         <div className="flex items-baseline gap-4 mt-2">
                             <span className="text-3xl font-medium text-[var(--color-text-primary)]">
-                                ${details.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 })}
+                                ${details.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </span>
                             <span className={`text-lg font-medium px-2 py-0.5 rounded-md ${isPositive ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
                                 {isPositive ? '+' : ''}{details.change24h?.toFixed(2)}%
@@ -42,30 +41,29 @@ export default async function CryptoDetailsPage({ params }: PageProps) {
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <StatCard label={t('marketCap')} value={details.marketCap ? format.number(details.marketCap, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 2 }) : 'N/A'} />
                 <StatCard label={t('volume24h')} value={details.volume24h ? format.number(details.volume24h, { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 2 }) : 'N/A'} />
-                <StatCard label={t('circulatingSupply')} value={details.circulatingSupply ? format.number(details.circulatingSupply, { notation: 'compact', maximumFractionDigits: 2 }) : 'N/A'} />
-                <StatCard label={t('totalSupply')} value={details.totalSupply ? format.number(details.totalSupply, { notation: 'compact', maximumFractionDigits: 2 }) : 'N/A'} />
                 <StatCard label={t('high24h')} value={details.high24h ? format.number(details.high24h, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
                 <StatCard label={t('low24h')} value={details.low24h ? format.number(details.low24h, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
-                <StatCard label={t('ath')} value={details.ath ? format.number(details.ath, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
-                <StatCard label={t('atl')} value={details.atl ? format.number(details.atl, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
+                <StatCard label={t('peRatio')} value={details.peRatio ? details.peRatio.toFixed(2) : 'N/A'} />
+                <StatCard label={t('dividendYield')} value={details.dividendYield ? format.number(details.dividendYield, { style: 'percent', maximumFractionDigits: 2 }) : 'N/A'} />
+                <StatCard label={t('52wHigh')} value={details.fiftyTwoWeekHigh ? format.number(details.fiftyTwoWeekHigh, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
+                <StatCard label={t('52wLow')} value={details.fiftyTwoWeekLow ? format.number(details.fiftyTwoWeekLow, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }) : 'N/A'} />
             </div>
 
-            <CryptoChartSection id={details.id} />
+            <StockChartSection symbol={details.id} />
 
             {details.description && (
                 <div className="bg-[var(--color-surface)]/40 p-6 sm:p-8 rounded-3xl border border-[var(--color-border)] backdrop-blur-xl">
                     <h3 className="text-2xl font-semibold text-white mb-4">{t('about')} {details.name}</h3>
                     <div
                         className="text-[var(--color-text-secondary)] leading-relaxed prose prose-invert max-w-none"
-                        dangerouslySetInnerHTML={{ __html: details.description }}
-                    />
+                    >
+                        {details.description}
+                    </div>
                 </div>
             )}
         </div>

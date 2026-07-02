@@ -106,3 +106,89 @@ export async function getTopStocks(apiPage: number = 1): Promise<AssetPrice[]> {
         return []
     }
 }
+
+export const getStockDetails = unstable_cache(
+    async (symbol: string) => {
+        if (!symbol) return null
+        try {
+            const quote = await yahooFinance.quote(symbol)
+            const quoteSummary = await yahooFinance.quoteSummary(symbol, { modules: ['assetProfile', 'summaryDetail'] }).catch(() => null)
+            
+            const profile = quoteSummary?.assetProfile
+            const detail = quoteSummary?.summaryDetail
+
+            return {
+                id: symbol,
+                symbol: symbol,
+                name: quote.shortName || quote.longName || symbol,
+                price: quote.regularMarketPrice || 0,
+                change24h: quote.regularMarketChangePercent || 0,
+                image: `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`,
+                marketCap: quote.marketCap,
+                volume24h: quote.regularMarketVolume,
+                type: 'stock' as const,
+                description: profile?.longBusinessSummary || '',
+                homepage: profile?.website || '',
+                high24h: detail?.dayHigh || quote.regularMarketDayHigh,
+                low24h: detail?.dayLow || quote.regularMarketDayLow,
+                sharesOutstanding: detail?.sharesOutstanding || quote.sharesOutstanding,
+                peRatio: detail?.trailingPE || quote.trailingPE,
+                dividendYield: detail?.dividendYield || quote.dividendYield,
+                fiftyTwoWeekHigh: detail?.fiftyTwoWeekHigh || quote.fiftyTwoWeekHigh,
+                fiftyTwoWeekLow: detail?.fiftyTwoWeekLow || quote.fiftyTwoWeekLow
+            }
+        } catch (error) {
+            console.error(`Error fetching stock details for ${symbol}:`, error)
+            return null
+        }
+    },
+    ['stock-details'],
+    { revalidate: 300 }
+)
+
+export const getStockHistory = unstable_cache(
+    async (symbol: string, timeframe: string) => {
+        if (!symbol) return []
+        try {
+            let period1 = new Date()
+            let interval: '15m' | '1h' | '1d' | '1wk' | '1mo' = '1d'
+            const now = Date.now()
+
+            switch (timeframe) {
+                case '1': 
+                    period1 = new Date(now - 1 * 24 * 60 * 60 * 1000); 
+                    interval = '15m'; 
+                    break;
+                case '7': 
+                    period1 = new Date(now - 7 * 24 * 60 * 60 * 1000); 
+                    interval = '1h'; 
+                    break;
+                case '30': 
+                    period1 = new Date(now - 30 * 24 * 60 * 60 * 1000); 
+                    interval = '1d'; 
+                    break;
+                case '365': 
+                    period1 = new Date(now - 365 * 24 * 60 * 60 * 1000); 
+                    interval = '1d'; 
+                    break;
+                case 'max': 
+                    period1 = new Date(0); 
+                    interval = '1mo'; 
+                    break;
+            }
+
+            const chart = await yahooFinance.chart(symbol, { period1, interval })
+            
+            return chart.quotes.map(q => ({
+                time: Math.floor(q.date.getTime() / 1000),
+                value: q.close || 0
+            })).filter(q => q.value !== null && q.value !== 0)
+
+        } catch (error) {
+            console.error(`Error fetching stock history for ${symbol}:`, error)
+            return []
+        }
+    },
+    ['stock-history'],
+    { revalidate: 300 }
+)

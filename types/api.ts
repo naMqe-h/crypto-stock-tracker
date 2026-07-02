@@ -26,11 +26,18 @@ export interface ChartData {
     value: number
 }
 
-export interface CryptoDetails extends AssetPrice {
+export interface AssetDetails extends AssetPrice {
     description?: string
     homepage?: string
     high24h?: number
     low24h?: number
     circulatingSupply?: number
     totalSupply?: number
+    sharesOutstanding?: number
+    peRatio?: number
+    dividendYield?: number
+    fiftyTwoWeekHigh?: number
+    fiftyTwoWeekLow?: number
+    ath?: number
+    atl?: number
 }

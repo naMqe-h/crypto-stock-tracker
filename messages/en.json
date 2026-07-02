@@ -36,11 +36,19 @@
         "topCrypto": "Top 20 Cryptocurrencies",
         "topStocks": "Top 20 US Stocks"
     },
-    "CryptoDetails": {
+    "AssetDetails": {
         "marketCap": "Market Cap",
         "volume24h": "24h Volume",
         "high24h": "24h High",
         "low24h": "24h Low",
+        "peRatio": "P/E Ratio",
+        "dividendYield": "Div Yield",
+        "52wHigh": "1Y High",
+        "52wLow": "1Y Low",
+        "ath": "All-Time High",
+        "atl": "All-Time Low",
+        "circulatingSupply": "Circulating Supply",
+        "totalSupply": "Total Supply",
         "about": "About",
         "priceChart": "Price Chart",
         "timeframes": {

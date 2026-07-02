@@ -10,7 +10,7 @@ interface TimeframeSelectorProps {
 }
 
 export function TimeframeSelector({ selected, onSelect }: TimeframeSelectorProps) {
-    const t = useTranslations('CryptoDetails.timeframes')
+    const t = useTranslations('AssetDetails.timeframes')
     const timeframes: Timeframe[] = ['1', '7', '30', '365', 'max']
 
     return (

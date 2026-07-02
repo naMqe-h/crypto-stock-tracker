@@ -92,7 +92,7 @@ export function SearchBar() {
                             return (
                                 <Link 
                                     key={item.id + item.type} 
-                                    href={item.type === 'crypto' ? `/crypto/${item.id}` : '#'}
+                                    href={item.type === 'crypto' ? `/crypto/${item.id}` : `/stocks/${item.symbol}`}
                                     className="flex items-center justify-between p-3 border-b border-[var(--color-border)] hover:bg-[var(--color-background)] transition-colors cursor-pointer"
                                     onClick={() => setIsOpen(false)}
                                 >

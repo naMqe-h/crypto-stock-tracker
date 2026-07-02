@@ -55,17 +55,20 @@ export function AssetsTable({ title, assets, type, startIndex = 1 }: AssetsTable
                         <tbody>
                             {assets.map((asset, index) => {
                                 const isPositive = asset.change24h >= 0
-                                const isCrypto = asset.type === 'crypto' || type === 'crypto'
                                 const saved = isSaved(asset.id)
+                                const actualType = asset.type || type
+                                
                                 return (
                                     <tr 
                                         key={asset.id} 
                                         onClick={() => {
-                                            if (isCrypto) {
+                                            if (actualType === 'crypto') {
                                                 router.push(`/crypto/${asset.id}`)
+                                            } else if (actualType === 'stock') {
+                                                router.push(`/stocks/${asset.id}`)
                                             }
                                         }}
-                                        className={`border-b border-[var(--color-border)]/50 hover:bg-[var(--color-surface-hover)]/30 transition-colors ${isCrypto ? 'cursor-pointer' : ''}`}
+                                        className={`border-b border-[var(--color-border)]/50 hover:bg-[var(--color-surface-hover)]/30 transition-colors ${(actualType === 'crypto' || actualType === 'stock') ? 'cursor-pointer' : ''}`}
                                     >
                                         <td className="px-4 py-2 text-center text-text-secondary font-medium">
                                             {startIndex + index}

@@ -36,11 +36,19 @@
         "topCrypto": "Top 20 Kryptowalut",
         "topStocks": "Top 20 Akcji (USA)"
     },
-    "CryptoDetails": {
+    "AssetDetails": {
         "marketCap": "Kapitalizacja",
         "volume24h": "Wolumen 24h",
         "high24h": "Maks. 24h",
         "low24h": "Min. 24h",
+        "peRatio": "C/Z (P/E)",
+        "dividendYield": "Dywidenda",
+        "52wHigh": "Maks. 1R",
+        "52wLow": "Min. 1R",
+        "ath": "Maks. (ATH)",
+        "atl": "Min. (ATL)",
+        "circulatingSupply": "W obiegu",
+        "totalSupply": "Całk. Podaż",
         "about": "O projekcie",
         "priceChart": "Wykres cenowy",
         "timeframes": {

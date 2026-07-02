@@ -102,7 +102,9 @@ export async function getCryptoDetails(id: string) {
             high24h: data.market_data.high_24h?.usd,
             low24h: data.market_data.low_24h?.usd,
             circulatingSupply: data.market_data.circulating_supply,
-            totalSupply: data.market_data.total_supply
+            totalSupply: data.market_data.total_supply,
+            ath: data.market_data.ath?.usd,
+            atl: data.market_data.atl?.usd
         }
     } catch (error) {
         console.error(`Error fetching crypto details for ${id}:`, error)
