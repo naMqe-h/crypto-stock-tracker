@@ -58,5 +58,15 @@
             "365": "1Y",
             "max": "ALL"
         }
+    },
+    "NotFoundAsset": {
+        "title": "Asset Not Found",
+        "description": "We couldn't find the asset you are looking for. The ID may be invalid or the data is temporarily unavailable.",
+        "goHome": "Return to Dashboard"
+    },
+    "NotFoundPage": {
+        "title": "Page Not Found",
+        "description": "The page you are looking for does not exist or has been moved.",
+        "goHome": "Return to Dashboard"
     }
 }

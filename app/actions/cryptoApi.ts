@@ -89,22 +89,22 @@ export async function getCryptoDetails(id: string) {
 
         return {
             id: data.id,
-            symbol: data.symbol.toUpperCase(),
-            name: data.name,
-            price: data.market_data.current_price.usd,
-            change24h: data.market_data.price_change_percentage_24h,
-            image: data.image.large || data.image.small,
-            marketCap: data.market_data.market_cap.usd,
-            volume24h: data.market_data.total_volume.usd,
+            symbol: data.symbol?.toUpperCase() || '',
+            name: data.name || '',
+            price: data.market_data?.current_price?.usd || 0,
+            change24h: data.market_data?.price_change_percentage_24h || 0,
+            image: data.image?.large || data.image?.small || '',
+            marketCap: data.market_data?.market_cap?.usd,
+            volume24h: data.market_data?.total_volume?.usd,
             type: 'crypto' as const,
             description: data.description?.en || '',
             homepage: data.links?.homepage?.[0] || '',
-            high24h: data.market_data.high_24h?.usd,
-            low24h: data.market_data.low_24h?.usd,
-            circulatingSupply: data.market_data.circulating_supply,
-            totalSupply: data.market_data.total_supply,
-            ath: data.market_data.ath?.usd,
-            atl: data.market_data.atl?.usd
+            high24h: data.market_data?.high_24h?.usd,
+            low24h: data.market_data?.low_24h?.usd,
+            circulatingSupply: data.market_data?.circulating_supply,
+            totalSupply: data.market_data?.total_supply,
+            ath: data.market_data?.ath?.usd,
+            atl: data.market_data?.atl?.usd
         }
     } catch (error) {
         console.error(`Error fetching crypto details for ${id}:`, error)

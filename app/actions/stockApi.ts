@@ -111,31 +111,33 @@ export const getStockDetails = unstable_cache(
     async (symbol: string) => {
         if (!symbol) return null
         try {
-            const quote = await yahooFinance.quote(symbol)
+            const quote = await yahooFinance.quote(symbol).catch(() => null)
             const quoteSummary = await yahooFinance.quoteSummary(symbol, { modules: ['assetProfile', 'summaryDetail'] }).catch(() => null)
             
+            if (!quote && !quoteSummary) return null
+
             const profile = quoteSummary?.assetProfile
             const detail = quoteSummary?.summaryDetail
 
             return {
                 id: symbol,
                 symbol: symbol,
-                name: quote.shortName || quote.longName || symbol,
-                price: quote.regularMarketPrice || 0,
-                change24h: quote.regularMarketChangePercent || 0,
+                name: quote?.shortName || quote?.longName || symbol,
+                price: quote?.regularMarketPrice || detail?.previousClose || 0,
+                change24h: quote?.regularMarketChangePercent || 0,
                 image: `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`,
-                marketCap: quote.marketCap,
-                volume24h: quote.regularMarketVolume,
+                marketCap: quote?.marketCap || detail?.marketCap,
+                volume24h: quote?.regularMarketVolume || detail?.volume,
                 type: 'stock' as const,
                 description: profile?.longBusinessSummary || '',
                 homepage: profile?.website || '',
-                high24h: detail?.dayHigh || quote.regularMarketDayHigh,
-                low24h: detail?.dayLow || quote.regularMarketDayLow,
-                sharesOutstanding: detail?.sharesOutstanding || quote.sharesOutstanding,
-                peRatio: detail?.trailingPE || quote.trailingPE,
-                dividendYield: detail?.dividendYield || quote.dividendYield,
-                fiftyTwoWeekHigh: detail?.fiftyTwoWeekHigh || quote.fiftyTwoWeekHigh,
-                fiftyTwoWeekLow: detail?.fiftyTwoWeekLow || quote.fiftyTwoWeekLow
+                high24h: detail?.dayHigh || quote?.regularMarketDayHigh,
+                low24h: detail?.dayLow || quote?.regularMarketDayLow,
+                sharesOutstanding: detail?.sharesOutstanding || quote?.sharesOutstanding,
+                peRatio: detail?.trailingPE || quote?.trailingPE,
+                dividendYield: detail?.dividendYield || quote?.dividendYield,
+                fiftyTwoWeekHigh: detail?.fiftyTwoWeekHigh || quote?.fiftyTwoWeekHigh,
+                fiftyTwoWeekLow: detail?.fiftyTwoWeekLow || quote?.fiftyTwoWeekLow
             }
         } catch (error) {
             console.error(`Error fetching stock details for ${symbol}:`, error)

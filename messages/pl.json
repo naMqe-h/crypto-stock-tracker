@@ -56,7 +56,17 @@
             "7": "7D",
             "30": "1M",
             "365": "1R",
-            "max": "MAX"
+            "max": "Max"
         }
+    },
+    "NotFoundAsset": {
+        "title": "Nie znaleziono zasobu",
+        "description": "Nie mogliśmy znaleźć zasobu, którego szukasz. Identyfikator może być nieprawidłowy lub dane są tymczasowo niedostępne.",
+        "goHome": "Wróć do Panelu"
+    },
+    "NotFoundPage": {
+        "title": "Nie znaleziono strony",
+        "description": "Strona, której szukasz nie istnieje lub została przeniesiona.",
+        "goHome": "Wróć do Panelu"
     }
 }
