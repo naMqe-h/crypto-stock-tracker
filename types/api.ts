@@ -20,3 +20,17 @@ export interface AssetPrice {
     volume24h?: number
     type?: AssetType
 }
+
+export interface ChartData {
+    time: number | string
+    value: number
+}
+
+export interface CryptoDetails extends AssetPrice {
+    description?: string
+    homepage?: string
+    high24h?: number
+    low24h?: number
+    circulatingSupply?: number
+    totalSupply?: number
+}

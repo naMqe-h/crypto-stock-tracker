@@ -32,7 +32,7 @@ export default async function StocksPage({
     const startIndex = (currentPage - 1) * 10 + 1
 
     return (
-        <div className="flex flex-col gap-8 w-full">
+        <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto p-6">
             <AssetsTable title={t('topStocks')} assets={topStocks} type="stock" startIndex={startIndex} />
             <Pagination currentPage={currentPage} hasNextPage={hasNextPage} />
         </div>

@@ -11,7 +11,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
     setRequestLocale(locale)
 
     return (
-        <div className="flex flex-col gap-12 w-full pb-16 pt-4">
+        <div className="flex flex-col gap-12 w-full max-w-7xl mx-auto p-6 pb-16 pt-4">
             <WatchlistView />
         </div>
     )

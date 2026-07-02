@@ -35,5 +35,20 @@
     "Dashboard": {
         "topCrypto": "Top 20 Cryptocurrencies",
         "topStocks": "Top 20 US Stocks"
+    },
+    "CryptoDetails": {
+        "marketCap": "Market Cap",
+        "volume24h": "24h Volume",
+        "high24h": "24h High",
+        "low24h": "24h Low",
+        "about": "About",
+        "priceChart": "Price Chart",
+        "timeframes": {
+            "1": "1D",
+            "7": "7D",
+            "30": "1M",
+            "365": "1Y",
+            "max": "ALL"
+        }
     }
 }

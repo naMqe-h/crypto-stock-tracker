@@ -35,5 +35,20 @@
     "Dashboard": {
         "topCrypto": "Top 20 Kryptowalut",
         "topStocks": "Top 20 Akcji (USA)"
+    },
+    "CryptoDetails": {
+        "marketCap": "Kapitalizacja",
+        "volume24h": "Wolumen 24h",
+        "high24h": "Maks. 24h",
+        "low24h": "Min. 24h",
+        "about": "O projekcie",
+        "priceChart": "Wykres cenowy",
+        "timeframes": {
+            "1": "1D",
+            "7": "7D",
+            "30": "1M",
+            "365": "1R",
+            "max": "MAX"
+        }
     }
 }

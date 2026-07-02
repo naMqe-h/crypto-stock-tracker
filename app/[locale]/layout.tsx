@@ -43,7 +43,7 @@ export default async function LocaleLayout({
                     <WatchlistProvider>
                         <div className="relative z-10 flex-1 flex flex-col h-screen overflow-hidden">
                             <Topbar />
-                            <main className="flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full">
+                            <main className="flex-1 overflow-y-auto w-full">
                                 {children}
                             </main>
                         </div>

@@ -5,6 +5,7 @@ import { useWatchlist } from '../store/WatchlistContext'
 
 import { useState } from 'react'
 import { useTranslations, useFormatter } from 'next-intl'
+import { useRouter } from '../i18n/routing'
 import { FaPlus, FaMinus } from 'react-icons/fa6'
 
 interface AssetsTableProps {
@@ -18,6 +19,7 @@ export function AssetsTable({ title, assets, type, startIndex = 1 }: AssetsTable
     const { isSaved, addItem, removeItem } = useWatchlist()
     const t = useTranslations('Table')
     const format = useFormatter()
+    const router = useRouter()
     const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
 
     const handleToggleWatchlist = (asset: AssetPrice) => {
@@ -53,9 +55,18 @@ export function AssetsTable({ title, assets, type, startIndex = 1 }: AssetsTable
                         <tbody>
                             {assets.map((asset, index) => {
                                 const isPositive = asset.change24h >= 0
+                                const isCrypto = asset.type === 'crypto' || type === 'crypto'
                                 const saved = isSaved(asset.id)
                                 return (
-                                    <tr key={asset.id} className="border-b border-[var(--color-border)]/50 hover:bg-[var(--color-surface-hover)]/30 transition-colors">
+                                    <tr 
+                                        key={asset.id} 
+                                        onClick={() => {
+                                            if (isCrypto) {
+                                                router.push(`/crypto/${asset.id}`)
+                                            }
+                                        }}
+                                        className={`border-b border-[var(--color-border)]/50 hover:bg-[var(--color-surface-hover)]/30 transition-colors ${isCrypto ? 'cursor-pointer' : ''}`}
+                                    >
                                         <td className="px-4 py-2 text-center text-text-secondary font-medium">
                                             {startIndex + index}
                                         </td>
@@ -103,7 +114,10 @@ export function AssetsTable({ title, assets, type, startIndex = 1 }: AssetsTable
                                         </td>
                                         <td className="px-4 py-2 text-center">
                                             <button
-                                                onClick={() => handleToggleWatchlist(asset)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    handleToggleWatchlist(asset)
+                                                }}
                                                 className={`p-2 rounded-full transition-all cursor-pointer inline-flex items-center justify-center w-8 h-8 ${saved
                                                         ? 'bg-[var(--color-danger)]/20 text-[var(--color-danger)] hover:bg-[var(--color-danger)] hover:text-white shadow-[0_0_10px_rgba(239,68,68,0.2)]'
                                                         : 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-black shadow-[0_0_10px_rgba(74,222,128,0.2)]'

@@ -8,6 +8,7 @@ import { searchStocks } from '../app/actions/stockApi'
 import { SearchResult } from '../types/api'
 import { FiSearch, FiPlus, FiCheck } from 'react-icons/fi'
 import { useWatchlist } from '../store/WatchlistContext'
+import { Link } from '../i18n/routing'
 
 export function SearchBar() {
     const t = useTranslations('Common')
@@ -89,7 +90,12 @@ export function SearchBar() {
                         {results.map((item) => {
                             const saved = isSaved(item.id)
                             return (
-                                <li key={item.id + item.type} className="flex items-center justify-between p-3 border-b border-[var(--color-border)] hover:bg-[var(--color-background)] transition-colors">
+                                <Link 
+                                    key={item.id + item.type} 
+                                    href={item.type === 'crypto' ? `/crypto/${item.id}` : '#'}
+                                    className="flex items-center justify-between p-3 border-b border-[var(--color-border)] hover:bg-[var(--color-background)] transition-colors cursor-pointer"
+                                    onClick={() => setIsOpen(false)}
+                                >
                                     <div className="flex items-center gap-3 overflow-hidden">
                                         {item.image ? (
                                             <img src={item.image} alt={item.name} className="w-8 h-8 rounded-full object-cover bg-white/10 p-0.5" />
@@ -119,7 +125,11 @@ export function SearchBar() {
                                             {item.type === 'crypto' ? 'Crypto' : 'Stock'}
                                         </span>
                                         <button
-                                            onClick={() => handleAdd(item)}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                handleAdd(item)
+                                            }}
                                             disabled={saved}
                                             className={`p-1.5 rounded-full cursor-pointer transition-colors ${saved ? 'bg-green-500/20 text-green-400 cursor-default' : 'bg-[var(--color-primary)]/20 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-black'}`}
                                             title={saved ? t('add') : t('add')}
@@ -127,7 +137,7 @@ export function SearchBar() {
                                             {saved ? <FiCheck size={16} /> : <FiPlus size={16} />}
                                         </button>
                                     </div>
-                                </li>
+                                </Link>
                             )
                         })}
                     </ul>

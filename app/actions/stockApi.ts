@@ -2,6 +2,7 @@
 
 import { SearchResult, AssetPrice } from '../../types/api'
 import YahooFinance from 'yahoo-finance2'
+import { unstable_cache } from 'next/cache'
 
 const yahooFinance = new YahooFinance()
 
@@ -38,28 +39,32 @@ export async function searchStocks(query: string): Promise<SearchResult[]> {
     }
 }
 
-export async function getStockPrice(symbol: string, name?: string, image?: string): Promise<AssetPrice | null> {
-    if (!symbol) return null
+export const getStockPrice = unstable_cache(
+    async (symbol: string, name?: string, image?: string): Promise<AssetPrice | null> => {
+        if (!symbol) return null
 
-    try {
-        const quote = await yahooFinance.quote(symbol)
+        try {
+            const quote = await yahooFinance.quote(symbol)
 
-        return {
-            id: symbol,
-            symbol: symbol,
-            name: name || quote.shortName || quote.longName || symbol,
-            price: quote.regularMarketPrice || 0,
-            change24h: quote.regularMarketChangePercent || 0,
-            marketCap: quote.marketCap,
-            volume24h: quote.regularMarketVolume,
-            image: image || `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`,
-            type: 'stock'
+            return {
+                id: symbol,
+                symbol: symbol,
+                name: name || quote.shortName || quote.longName || symbol,
+                price: quote.regularMarketPrice || 0,
+                change24h: quote.regularMarketChangePercent || 0,
+                marketCap: quote.marketCap,
+                volume24h: quote.regularMarketVolume,
+                image: image || `https://companiesmarketcap.com/img/company-logos/64/${symbol.replace('.', '-')}.webp`,
+                type: 'stock'
+            }
+        } catch (error) {
+            console.error(`Error fetching stock price for ${symbol}:`, error)
+            return null
         }
-    } catch (error) {
-        console.error(`Error fetching stock price for ${symbol}:`, error)
-        return null
-    }
-}
+    },
+    ['stock-price'],
+    { revalidate: 300 }
+)
 
 export async function getStockPrices(symbols: string[]): Promise<AssetPrice[]> {
     if (!symbols || symbols.length === 0) return []

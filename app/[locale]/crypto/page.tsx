@@ -29,7 +29,7 @@ export default async function CryptoPage({
     const startIndex = (currentPage - 1) * 10 + 1
 
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full max-w-7xl mx-auto p-6">
             <AssetsTable title={t('topCrypto')} assets={topCrypto} type="crypto" startIndex={startIndex} />
             <Pagination currentPage={currentPage} hasNextPage={hasNextPage} />
         </div>
