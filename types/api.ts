@@ -23,7 +23,12 @@ export interface AssetPrice {
 
 export interface ChartData {
     time: number | string
-    value: number
+    value?: number
+    open?: number
+    high?: number
+    low?: number
+    close?: number
+    volume?: number
 }
 
 export interface AssetDetails extends AssetPrice {

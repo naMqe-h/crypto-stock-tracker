@@ -183,7 +183,12 @@ export const getStockHistory = unstable_cache(
             
             return chart.quotes.map(q => ({
                 time: Math.floor(q.date.getTime() / 1000),
-                value: q.close || 0
+                value: q.close || 0,
+                open: q.open || 0,
+                high: q.high || 0,
+                low: q.low || 0,
+                close: q.close || 0,
+                volume: q.volume || 0
             })).filter(q => q.value !== null && q.value !== 0)
 
         } catch (error) {
